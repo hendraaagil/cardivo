@@ -1,0 +1,13 @@
+[
+    {
+        "slug": "hendraaagil",
+        "name": "Hendra Agil",
+        "description": "Hi, I'm a Software Engineer. Nice to meet you! 👋",
+        "image": "https://avatars.githubusercontent.com/hendraaagil",
+        "backgroundColor": "#0F172A",
+        "pattern": "brickWall",
+        "colorPattern": "#EFF4F6",
+        "opacity": "0.05",
+        "fontColor": "#F9FAFC"
+    }
+]

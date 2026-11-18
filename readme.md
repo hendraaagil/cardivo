@@ -1,52 +1,74 @@
 <div align="center">
 <h1>Cardivo card name</h1>
 
-<p>Get your card name dynamically 😎</p>
+<p>Get your card name for your GitHub profile readme 😎</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/satyawikananda/cardivo/main/LICENSE?token=AH44ZFH7IF2KSEDK7LSIW3C7YOFYC)
-[![Issue](https://img.shields.io/github/issues/satyawikananda/cardivo)](https://img.shields.io/github/issues/satyawikananda/cardivo)
-[![Forks](https://img.shields.io/github/forks/satyawikananda/cardivo)](https://img.shields.io/github/forks/satyawikananda/cardivo)
-[![Stars](https://img.shields.io/github/stars/satyawikananda/cardivo)](https://img.shields.io/github/stars/satyawikananda/cardivo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 </div>
 
 # Description
 
-A few months ago, GitHub launched a new feature call Magic Readme which is that file readme will be appear in your GitHub profile and you can set your skills, portfolio, etc in that file readme.
+GitHub shows the readme of a repo named after your username on your profile page (the "magic readme"), where you can put your skills, portfolio, etc.
 
-Cardivo is a serverless dynamically card name based on SVG (Scalable Vector Graphics) which is you can make your own card name and set in your magic readme. For the tech stack, Cardivo using Typescript and serverless function from Vercel and also this project had been deployed on Vercel.
+Cardivo generates name cards as static SVG (Scalable Vector Graphics) files at build time, so you can host them anywhere static (e.g. Cloudflare Pages) and embed them in your profile readme.
+
+> Forked from [satyawikananda/cardivo](https://github.com/satyawikananda/cardivo), which renders cards on the fly with a Vercel serverless function.
 
 # How to use this?
 
-It's simple, you can copy paste this markdown content, like this one:
+1. Add your card(s) to `cards.json`:
 
-```
-![Satya Wikananda's card name](https://cardivo.vercel.app/api?name=[name]&description=[description]&image=[image_url])
-```
+    ```json
+    [
+        {
+            "slug": "me",
+            "name": "Satya Wikananda",
+            "description": "I am a coder",
+            "image": "https://avatars.githubusercontent.com/u/33148052?v=4",
+            "pattern": "leaf",
+            "github": "satyawikananda"
+        }
+    ]
+    ```
 
-There are several options you can use, and the options is:
+2. Build:
 
-| Options           | Description                                                          | Type           | Example                         | Query Params                |
-| ----------------- | -------------------------------------------------------------------- | -------------- | ------------------------------- | --------------------------- |
-| Name              | **Mandatory** Your name                                              | String         | Satya Wikananda                 | `?name=[value]`             |
-| Description       | **Mandatory** Some text about you                                    | String         | I am a coder                    | `?description=[value]`      |
-| Image             | **Mandatory** An avatar image of you                                 | URL            | `https://example.com/image.jpg` | `?image=[value]`            |
-| Background Color  | Background color for the card name                                   | Hex color code | `%23ffffff`                     | `?backgroundColor=[value]`  |
-| Icon Color        | Colorize the icons in card name                                      | Hex color code | `%23e64a19`                     | `?iconColor=[value]`        |
-| Font Color        | Font color for the card name                                         | Hex color code | `%23000000`                     | `?fontColor=[value]`        |
-| Site              | If you have a site, you can fill this one                            | String         | `https://satyawikananda.tech`   | `?site=[value]`             |
-| Pattern           | You can use a pattern for the background. You can see the list below | String         | plus                            | `?pattern=[value]`          |
-| Color Pattern     | Fill the color pattern                                               | Hex color code | `%231abc9c`                     | `?colorPattern=[value]`     |
-| Opacity Pattern   | Opacity of the pattern background                                    | Float          | `0` - `1`                       | `?opacity=[value]`          |
-| Instagram         | Your Instagram username                                              | String         | satyawikananda                  | `?instagram=[value]`        |
-| Linkedin          | Your Linkedin username                                               | String         | Satya Wikananda                 | `?linkedin=[value]`         |
-| GitHub            | Your GitHub username                                                 | String         | satyawikananda                  | `?github=[value]`           |
-| Twitter           | Your Twitter username                                                | String         | satya_wikananda                 | `?twitter=[value]`          |
-| Disable Animation | Disable animation transition                                         | Boolean        | `true`                          | `?disableAnimation=[value]` |
+    ```sh
+    pnpm install
+    pnpm build   # writes dist/<slug>.svg
+    ```
 
-> NB: Remove the square bracket
+3. Deploy `dist/` to any static host. For Cloudflare Pages: build command `pnpm build`, build output directory `dist`.
 
-Pattern in Cardivo, i'm used the [Hero Pattern](https://github.com/lowmess/hero-patterns) package which is developed by [Lowmess](https://github.com/lowmess/), and here the list:
+4. Embed it in your readme:
+
+    ```md
+    ![My card name](https://<your-site>.pages.dev/me.svg)
+    ```
+
+Card options:
+
+| Key                | Description                                                          | Type           | Example                         |
+| ------------------ | -------------------------------------------------------------------- | -------------- | ------------------------------- |
+| `slug`             | **Mandatory** Output file name (`dist/<slug>.svg`)                   | String         | me                              |
+| `name`             | **Mandatory** Your name                                              | String         | Satya Wikananda                 |
+| `description`      | **Mandatory** Some text about you                                    | String         | I am a coder                    |
+| `image`            | **Mandatory** An avatar image of you, fetched and inlined at build   | URL            | `https://example.com/image.jpg` |
+| `backgroundColor`  | Background color for the card name                                   | Hex color code | `#ffffff`                       |
+| `iconColor`        | Colorize the icons in card name                                      | Hex color code | `#e64a19`                       |
+| `fontColor`        | Font color for the card name                                         | Hex color code | `#000000`                       |
+| `site`             | If you have a site, you can fill this one                            | String         | `https://satyawikananda.tech`   |
+| `pattern`          | You can use a pattern for the background. You can see the list below | String         | plus                            |
+| `colorPattern`     | Fill the color pattern                                               | Hex color code | `#1abc9c`                       |
+| `opacity`          | Opacity of the pattern background                                    | Float          | `0` - `1`                       |
+| `instagram`        | Your Instagram username                                              | String         | satyawikananda                  |
+| `linkedin`         | Your Linkedin username                                               | String         | Satya Wikananda                 |
+| `github`           | Your GitHub username                                                 | String         | satyawikananda                  |
+| `twitter`          | Your Twitter username                                                | String         | satya_wikananda                 |
+| `disableAnimation` | Disable animation transition                                         | Boolean        | `true`                          |
+
+Pattern in Cardivo uses the [Hero Pattern](https://github.com/lowmess/hero-patterns) package which is developed by [Lowmess](https://github.com/lowmess/), and here the list:
 
 | Pattern          | Value            |
 | ---------------- | ---------------- |
@@ -63,30 +85,23 @@ Pattern in Cardivo, i'm used the [Hero Pattern](https://github.com/lowmess/hero-
 | Floating Cogs    | floatingCogs     |
 | Leaf             | leaf             |
 | Rain             | rain             |
-| Polkadots        | polkadots        |
+| Polkadots        | polkaDots        |
 | Tic Tac Toe      | ticTacToe        |
 
-# Example
+# Development
 
-This is example of using cardivo:
-
-Markdown content:
-
-```md
-![Satya wikananda's card name](https://cardivo.vercel.app/api?name=Satya%20Wikananda&description=Hi,%20i%27m%20a%20front%20end%20web%20developer%20and%20i%27m%2020%20y.o.%20Nice%20to%20meet%20you%20%F0%9F%91%8B&image=https://avatars.githubusercontent.com/u/33148052?v=4&backgroundColor=%23ecf0f1&instagram=satyawikananda&linkedin=I%20Gusti%20Ngurah%20Satya%20%20Wikananda&github=satyawikananda&twitter=satya_wikananda&pattern=leaf&colorPattern=%23eaeaea)
+```sh
+pnpm build   # generate dist/
+pnpm test    # node:test via tsx
 ```
-
-Result:
-
-![Satya wikananda's card name](https://cardivo.vercel.app/api?name=Satya%20Wikananda&description=Hi,%20i%27m%20a%20front%20end%20web%20developer%20and%20i%27m%2020%20y.o.%20Nice%20to%20meet%20you%20%F0%9F%91%8B&image=https://avatars.githubusercontent.com/u/33148052?v=4&backgroundColor=%23ecf0f1&instagram=satyawikananda&linkedin=I%20Gusti%20Ngurah%20Satya%20%20Wikananda&github=satyawikananda&twitter=satya_wikananda&pattern=leaf&colorPattern=%23eaeaea)
 
 # Contribution
 
-Want to make this project better? You can contribute this project, I am very open if there are contributions to this project.
+Want to make this project better? Contributions are welcome.
 
 ---
 
 ![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)
 ![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)
 
-Powered by Typescript and vercel. Code licensed under MIT License.
+Powered by Typescript. Code licensed under MIT License.

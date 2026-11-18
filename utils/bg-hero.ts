@@ -40,6 +40,7 @@ const getPattern = (pattern: any, opacity: string, colorPattern: string): string
         [HeroPattern.wiggle]: wiggle,
     };
     const patternFunc = patternMapping[pattern];
+    if (!patternFunc) throw new Error(`Unknown pattern "${pattern}"`);
     const fillOpacity = [colorPattern, opacity];
     return patternFunc.apply(null, fillOpacity);
 };

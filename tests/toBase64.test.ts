@@ -1,8 +1,8 @@
-import toBase64ImageUrl from '../utils/toBase64'
+import { test } from 'node:test';
+import assert from 'node:assert';
+import toBase64ImageUrl from '../utils/toBase64';
 
-describe("Image URL to base64 string", () => {
-    test('it should be a string base64', async () => {
-        const imageUrl = "https://avatars1.githubusercontent.com/u/33148052?v=4"
-        expect(await toBase64ImageUrl(imageUrl)).toMatch(new RegExp(/[A-Za-z0-9+/=]/))
-    })
-})
+test('it should be a string base64', async () => {
+    const imageUrl = 'https://avatars1.githubusercontent.com/u/33148052?v=4';
+    assert.match(await toBase64ImageUrl(imageUrl), /^data:image\/\w+;base64,[A-Za-z0-9+/=]+$/);
+});
