@@ -13,6 +13,8 @@ GitHub shows the readme of a repo named after your username on your profile page
 
 Cardivo generates name cards as static SVG (Scalable Vector Graphics) files at build time, so you can host them anywhere static (e.g. Cloudflare Pages) and embed them in your profile readme.
 
+Live at [cardivo.pages.dev](https://cardivo.pages.dev/), which lists every card in `cards.json`.
+
 > Forked from [satyawikananda/cardivo](https://github.com/satyawikananda/cardivo), which renders cards on the fly with a Vercel serverless function.
 
 # How to use this?
@@ -46,6 +48,14 @@ Cardivo generates name cards as static SVG (Scalable Vector Graphics) files at b
     ```md
     ![My card name](https://<your-site>.pages.dev/me.svg)
     ```
+
+Example, built from this repo's `cards.json`:
+
+```md
+![Hendra Agil's card name](https://cardivo.pages.dev/hendraaagil.svg)
+```
+
+![Hendra Agil's card name](https://cardivo.pages.dev/hendraaagil.svg)
 
 Card options:
 
