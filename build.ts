@@ -50,6 +50,24 @@ async function build() {
         writeFileSync(`${__dirname}/dist/${card.slug}.svg`, svg);
         console.log(`dist/${card.slug}.svg`);
     }
+
+    const items = cards
+        .map((c) => `<li><a href="${escape(c.slug)}.svg">${escape(c.slug)}.svg</a><br><img src="${escape(c.slug)}.svg" alt="${escape(c.name)}" width="640"></li>`)
+        .join('\n');
+    writeFileSync(
+        `${__dirname}/dist/index.html`,
+        `<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardivo</title>
+<style>body{font-family:sans-serif;max-width:680px;margin:2rem auto;padding:0 1rem}li{margin-bottom:2rem}img{max-width:100%;height:auto}</style>
+<h1>Cardivo</h1>
+<ul>
+${items}
+</ul>
+`,
+    );
+    console.log('dist/index.html');
 }
 
 build().catch((e) => {

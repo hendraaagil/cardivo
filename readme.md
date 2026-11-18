@@ -36,7 +36,7 @@ Cardivo generates name cards as static SVG (Scalable Vector Graphics) files at b
 
     ```sh
     pnpm install
-    pnpm build   # writes dist/<slug>.svg
+    pnpm build   # writes dist/<slug>.svg + dist/index.html (card list)
     ```
 
 3. Deploy `dist/` to any static host. For Cloudflare Pages: build command `pnpm build`, build output directory `dist`.
